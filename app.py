@@ -1,4 +1,4 @@
- from flask import Flask, render_template, request
+from flask import Flask, render_template, request
 import pickle
 import pandas as pd
 
@@ -19,7 +19,6 @@ def Home():
 
 
 @app.route("/predict", methods=["POST"])
-@app.route("/predict", methods=["POST"])
 def predict():
     if request.method == "POST":
         Credit_line_outstanding = int(request.form["Credit_line_outstanding"])
@@ -27,35 +26,25 @@ def predict():
         Total_debt_outstanding = float(request.form["Total_debt_outstanding"])
         Income = float(request.form["Income"])
         Years_employed = int(request.form["Years_employed"])
-        Fico_scorecd = int(request.form["Fico_score"])
+        Fico_score = int(request.form["Fico_score"])
+        
         prediction = model.predict(
-            [[Credit_line_outstanding, Loan_amt_outstanding, Total_debt_outstanding, Income, Years_employed, Fico_score ]]
+            [[Credit_line_outstanding, Loan_amt_outstanding, Total_debt_outstanding, Income, Years_employed, Fico_score]]
         )
-if prediction[0] == 1:
-    return render_template(
-        "index.html",
-        prediction_text="Make an appointment with your banker",
-    )
-else:
-    return render_template(
-        "index.html",
-        prediction_text="You are in default of payment :)"
-    )
-
-else:    
-    return render_template("index.html")
-
+        
+        if prediction[0] == 1:
+            return render_template(
+                "index.html",
+                prediction_text="Make an appointment with your banker",
+            )
+        else:
+            return render_template(
+                "index.html",
+                prediction_text="You are in default of payment :)"
+            )
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
- 
-
-
-
-
-
-
-
 
 
 
