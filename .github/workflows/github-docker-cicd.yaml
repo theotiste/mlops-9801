@@ -34,7 +34,7 @@ jobs:
 #The fetch-depth: 0 parameter ensures that the complete commit history is fetched.
 
         - name: Set up Python 3.9
-          uses: actions/setup-@v1
+          uses: actions/setup-python@v1
           with:
             python-version: 3.9
 #The second step sets up Python 3.9 by using the actions/setup-python@v1 action.
