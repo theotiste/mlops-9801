@@ -1,11 +1,11 @@
-  from flask import Flask, render_template, request
+from  flask import Flask, render_template, request
 import pickle
 import pandas as pd
 import os
-##
+#
 from arize.pandas.logger import Client, Schema
-from arize.utils.types import ModelTypes, Environments
-##
+from arizeutils.types import ModelTypes, Environments
+#
 from dotenv import load_dotenv
 load_dotenv() 
 import datetime
