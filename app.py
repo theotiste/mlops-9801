@@ -3,7 +3,7 @@ import pickle
 import pandas as pd
 
 app = Flask(__name__)
-model = pickle.load(open("catboost_model-2.pkl", "rb"))
+model = pickle.load(open("catboost_model.pkl", "rb"))
 
 def model_pred(features):
     test_data = pd.DataFrame([features])
@@ -17,6 +17,7 @@ def Home():
 @app.route("/predict", methods=["POST"])
 def predict():
     if request.method == "POST":
+        Customer_id = int(request.form["Customer_id"])
         Credit_line_outstanding = int(request.form["Credit_line_outstanding"])
         Loan_amt_outstanding = float(request.form["Loan_amt_outstanding"])
         Total_debt_outstanding = float(request.form["Total_debt_outstanding"])
