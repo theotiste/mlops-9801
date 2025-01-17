@@ -1,11 +1,12 @@
 from app import model_pred
 
-new_data = {'Credit_line_outstanding': 5,
-            'Loan_amt_outstanding': 1958.92,
-            'Total_debt_outstanding': 8228.75,
-            'Income':26648.71,
-            'Years_employed': 2,
-            'Fico_score': 572,
+new_data = {'Customer_id': 8153374,
+            'Credit_line_outstanding': 0,
+            'Loan_amt_outstanding': 5221.545193,
+            'Total_debt_outstanding': 3915.471226,
+            'Income': 78039.38546,
+            'Years_employed': 5,
+            'Fico_score': 605
             }
 
 
