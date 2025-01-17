@@ -13,7 +13,7 @@ env:
                                        # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: conteneur9801        # set this to the name of the container in th
                                              # containerDefinitions section of your task definitio
-permissions
+permissions:
   contents: read
 
 jobs:
