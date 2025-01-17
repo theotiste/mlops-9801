@@ -26,7 +26,7 @@ def predict():
         Fico_score = int(request.form["Fico_score"])
         
         prediction = model.predict(
-            [[Credit_line_outstanding, Loan_amt_outstanding, Total_debt_outstanding, Income, Years_employed, Fico_score]]
+            [[Customer_id, Credit_line_outstanding, Loan_amt_outstanding, Total_debt_outstanding, Income, Years_employed, Fico_score]]
         )
         
         if prediction[0] == 1:
