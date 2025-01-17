@@ -20,14 +20,14 @@ arize_client = Client(space_key=ARIZE_SPACE_KEY, api_key=ARIZE_API_KEY)
 schema = Schema(
     prediction_id_column_name="prediction_id",
     timestamp_column_name="timestamp",
-    feature_column_names=["Credit_line_outstanding", "Loan_amt_outstanding", "Total_debt_outstanding", "Income", "Years_employed", "Fico_score"],
+    feature_column_names=["Customer_id, Credit_line_outstanding", "Loan_amt_outstanding", "Total_debt_outstanding", "Income", "Years_employed", "Fico_score"],
     prediction_label_column_name="prediction_label",
     actual_label_column_name="actual_label"
 )
 
 
 app = Flask(__name__)
-model = pickle.load(open("catboost_model-2.pkl", "rb"))
+model = pickle.load(open("catboost_model.pkl", "rb"))
 
 
 def model_pred(features):
@@ -44,6 +44,7 @@ def Home():
 @app.route("/predict", methods=["POST"])
 def predict():
     if request.method == "POST":
+        Customer_id = int(request.form["Customer_id"])
         Credit_line_outstanding = int(request.form["Credit_line_outstanding"])
         Loan_amt_outstanding = float(request.form["Loan_amt_outstanding"])
         Total_debt_outstanding = float(request.form["Total_debt_outstanding"])
@@ -56,7 +57,7 @@ def predict():
         #
 
         prediction = model.predict(
-            [[Credit_line_outstanding, Loan_amt_outstanding, Total_debt_outstanding, Income, Years_employed, Fico_score]]
+            [[Customer, Credit_line_outstanding, Loan_amt_outstanding, Total_debt_outstanding, Income, Years_employed, Fico_score]]
         )
         # Log the prediction to Arize
         timestamp = pd.Timestamp.now()
@@ -65,6 +66,7 @@ def predict():
         data = {
             "prediction_id": [str(timestamp.timestamp())],  # Unique ID for each prediction
             "timestamp": [timestamp],
+            "Customer_id": [Customer_id],
             "Credit_line_outstanding": [Credit_line_outstanding],
             "Loan_amt_outstanding": [Loan_amt_outstanding],
             "Total_debt_outstanding": [Total_debt_outstanding],
