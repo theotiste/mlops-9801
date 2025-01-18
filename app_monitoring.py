@@ -20,7 +20,7 @@ arize_client = Client(space_key=ARIZE_SPACE_KEY, api_key=ARIZE_API_KEY)
 schema = Schema(
     prediction_id_column_name="prediction_id",
     timestamp_column_name="timestamp",
-    feature_column_names=["Customer_id, Credit_line_outstanding", "Loan_amt_outstanding", "Total_debt_outstanding", "Income", "Years_employed", "Fico_score"],
+    feature_column_names=["Customer_id", "Credit_line_outstanding", "Loan_amt_outstanding", "Total_debt_outstanding", "Income", "Years_employed", "Fico_score"],
     prediction_label_column_name="prediction_label",
     actual_label_column_name="actual_label"
 )
@@ -57,7 +57,7 @@ def predict():
         #
 
         prediction = model.predict(
-            [[Customer, Credit_line_outstanding, Loan_amt_outstanding, Total_debt_outstanding, Income, Years_employed, Fico_score]]
+            [[Customer_id, Credit_line_outstanding, Loan_amt_outstanding, Total_debt_outstanding, Income, Years_employed, Fico_score]]
         )
         # Log the prediction to Arize
         timestamp = pd.Timestamp.now()
