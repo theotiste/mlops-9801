@@ -3,7 +3,8 @@ import pickle
 import pandas as pd
 
 app = Flask(__name__)
-model = pickle.load(open("catboost_model.pkl", "rb"))
+model = pickle.load(open("catboost_model-1.pkl", "rb"))
+                                        
 
 def model_pred(features):
     test_data = pd.DataFrame([features])
@@ -37,13 +38,11 @@ def predict():
         else:
             return render_template(
                 "index.html",
-                prediction_text="You are in default of payment :)"
+                prediction_text="loan granted"
             )
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
-
-
+    app.run(host="0.0.0.0", port=5000, debug=True)      
 
 
 
