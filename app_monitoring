@@ -1,4 +1,4 @@
-from  flask import Flask, render_template, request
+  from flask import Flask, render_template, request
 import pickle
 import pandas as pd
 import os
@@ -28,7 +28,7 @@ schema = Schema(
 
 
 app = Flask(__name__)
-model = pickle.load(open("catboost_model.pkl", "rb"))
+model = pickle.load(open("catboost_model-1.pkl", "rb"))
 
 
 def model_pred(features):
@@ -68,7 +68,7 @@ def predict():
             "prediction_id": [str(timestamp.timestamp())],  # Unique ID for each prediction
             "timestamp": [timestamp],
             "Customer_id": [Customer_id],
-            "Credit_line_outstanding": [Credit_line_outstanding],
+            "Credit_line_outstanding" = [Credit_line_outstanding])
             "Loan_amt_outstanding": [Loan_amt_outstanding],
             "Total_debt_outstanding": [Total_debt_outstanding],
             "Income": [Income],
@@ -112,8 +112,7 @@ def predict():
 
         else:
             return render_template(
-                "index.html", prediction_text="You are in default of payment :)"
-            )
+                "index.html", prediction_text="Loan granted"
 
     else:
         return render_template("index.html")
