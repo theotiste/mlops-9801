@@ -25,6 +25,9 @@ jobs:
         run: |
           echo "SPACE_KEY=${{ secrets.ARIZE_SPACE_KEY }}" >> $GITHUB_ENV
           echo "API_KEY=${{ secrets.ARIZE_API_KEY }}" >> $GITHUB_ENV
+      - name: Set variable
+        run: |   
+          echo "MY_VAR=value" >> $GITHUB_ENV
 
       - name: Run Application
         run: python app_monitoring.py
