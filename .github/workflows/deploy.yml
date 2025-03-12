@@ -30,4 +30,8 @@ jobs:
           echo "MY_VAR=value" >> $GITHUB_ENV
 
       - name: Run Application
-        run: python app_monitoring.py
+        run : gunicorn -w 4 -b 0.0.0.0:5000 app_monitoring:app &
+          
+
+#      - name: Run Application
+#        run: python app_monitoring.py
